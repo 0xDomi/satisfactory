@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SatisfactorySaveUpload")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fad3f2a05dd7d1600764cac44b5d87abeaeefdc3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ad1a2890b52e9ea9ebbb9bc2b49d7f650cd215c")]
 [assembly: System.Reflection.AssemblyProductAttribute("SatisfactorySaveUpload")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SatisfactorySaveUpload")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
