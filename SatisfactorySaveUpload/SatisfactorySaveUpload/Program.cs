@@ -8,7 +8,7 @@ class Program
     static string repoPath = @"D:\satisfactory\satisfactory";
 
     // Lokaler Pfad zur Savegame-Datei, die du hochladen willst
-    static string saveFilePath = @"D:\satisfactory";
+    static string saveFilePath = @"D:\satisfactory\SnapshotDomi.sav";
 
     // Pfad, wo im Repo die Datei liegen soll (relativ zu repoPath)
     static string repoSaveFilePath = Path.Combine(repoPath, @"CurrentSaveFile\SnapshotDomi.sav");
@@ -24,7 +24,8 @@ class Program
             Console.WriteLine("Datei kopiert.");
 
             // 2. Git add
-            RunGitCommand("add SnapshotDomi.sav");
+            RunGitCommand("add CurrentSaveFile/SnapshotDomi.sav");
+
 
             // 3. Git commit
             string commitMessage = $"Update save {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
