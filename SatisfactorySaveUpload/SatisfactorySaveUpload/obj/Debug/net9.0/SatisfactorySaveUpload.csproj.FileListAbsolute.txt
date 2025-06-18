@@ -1,0 +1,15 @@
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\bin\Debug\net9.0\SatisfactorySaveUpload.exe
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\bin\Debug\net9.0\SatisfactorySaveUpload.deps.json
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\bin\Debug\net9.0\SatisfactorySaveUpload.runtimeconfig.json
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\bin\Debug\net9.0\SatisfactorySaveUpload.dll
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\bin\Debug\net9.0\SatisfactorySaveUpload.pdb
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\obj\Debug\net9.0\SatisfactorySaveUpload.GeneratedMSBuildEditorConfig.editorconfig
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\obj\Debug\net9.0\SatisfactorySaveUpload.AssemblyInfoInputs.cache
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\obj\Debug\net9.0\SatisfactorySaveUpload.AssemblyInfo.cs
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\obj\Debug\net9.0\SatisfactorySaveUpload.csproj.CoreCompileInputs.cache
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\obj\Debug\net9.0\SatisfactorySaveUpload.sourcelink.json
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\obj\Debug\net9.0\SatisfactorySaveUpload.dll
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\obj\Debug\net9.0\refint\SatisfactorySaveUpload.dll
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\obj\Debug\net9.0\SatisfactorySaveUpload.pdb
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\obj\Debug\net9.0\SatisfactorySaveUpload.genruntimeconfig.cache
+D:\satisfactory\satisfactory\SatisfactorySaveUpload\SatisfactorySaveUpload\obj\Debug\net9.0\ref\SatisfactorySaveUpload.dll
