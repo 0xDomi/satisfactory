@@ -1,45 +1,91 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Threading;
 
 class Program
 {
-    // Lokaler Pfad zu deinem GitHub Repo
-    static string repoPath = @"D:\satisfactory\satisfactory";
-
-    // Lokaler Pfad zur Savegame-Datei, die du hochladen willst
-    static string saveFilePath = @"D:\satisfactory\SnapshotDomi.sav";
-
-    // Pfad, wo im Repo die Datei liegen soll (relativ zu repoPath)
-    static string repoSaveFilePath = Path.Combine(repoPath, @"CurrentSaveFile\SnapshotDomi.sav");
+    static string saveFolderPath;
+    static string repoPath;
+    static string repoSaveRelativePath = @"CurrentSaveFile\SnapshotLatest.sav";
+    static string repoSaveFullPath;
 
     static void Main(string[] args)
     {
-        try
+        Console.WriteLine("=== Savegame Auto-Uploader ===\n");
+
+        Console.Write("Pfad zum Savegame-Ordner eingeben: ");
+        saveFolderPath = Console.ReadLine().Trim('"');
+
+        Console.Write("Pfad zum Git-Repository eingeben: ");
+        repoPath = Console.ReadLine().Trim('"');
+
+        repoSaveFullPath = Path.Combine(repoPath, repoSaveRelativePath);
+
+        Console.WriteLine("\nStarte Savegame-Uploader. Alle 5 Minuten wird geprüft...");
+
+        while (true)
         {
-            Console.WriteLine("Starte Upload Prozess...");
+            try
+            {
+                ProcessLatestSave();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fehler beim Verarbeiten: {ex.Message}");
+            }
 
-            // 1. Datei kopieren (überschreiben)
-            File.Copy(saveFilePath, repoSaveFilePath, true);
-            Console.WriteLine("Datei kopiert.");
-
-            // 2. Git add
-            RunGitCommand("add CurrentSaveFile/SnapshotDomi.sav");
-
-
-            // 3. Git commit
-            string commitMessage = $"Update save {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
-            RunGitCommand($"commit -m \"{commitMessage}\"");
-
-            // 4. Git push
-            RunGitCommand("push");
-
-            Console.WriteLine("Upload abgeschlossen.");
+            Thread.Sleep(TimeSpan.FromMinutes(5));
         }
-        catch (Exception ex)
+    }
+
+
+    static void ProcessLatestSave()
+    {
+        if (!Directory.Exists(saveFolderPath))
         {
-            Console.WriteLine("Fehler: " + ex.Message);
+            Console.WriteLine($"Savegame-Pfad existiert nicht: {saveFolderPath}");
+            return;
         }
+
+        var latestSave = Directory.GetFiles(saveFolderPath, "*.sav")
+                                  .Select(f => new FileInfo(f))
+                                  .OrderByDescending(f => f.LastWriteTime)
+                                  .FirstOrDefault();
+
+        if (latestSave == null)
+        {
+            Console.WriteLine("Keine .sav-Dateien gefunden.");
+            return;
+        }
+
+        DateTime? existingTimestamp = File.Exists(repoSaveFullPath)
+            ? File.GetLastWriteTime(repoSaveFullPath)
+            : null;
+
+        if (existingTimestamp.HasValue && latestSave.LastWriteTime <= existingTimestamp.Value)
+        {
+            Console.WriteLine("Keine neuere Save-Datei gefunden.");
+            return;
+        }
+
+        Console.WriteLine($"Neue Save-Datei gefunden: {latestSave.Name} ({latestSave.LastWriteTime})");
+
+        // Datei kopieren und überschreiben
+        Directory.CreateDirectory(Path.GetDirectoryName(repoSaveFullPath));
+        File.Copy(latestSave.FullName, repoSaveFullPath, true);
+        Console.WriteLine("Datei ins Repo kopiert.");
+
+        // Git-Vorgänge
+        RunGitCommand($"add \"{repoSaveRelativePath}\"");
+
+        string commitMessage = $"Automatisches Save-Update: {latestSave.Name} ({latestSave.LastWriteTime:yyyy-MM-dd HH:mm:ss})";
+        RunGitCommand($"commit -m \"{commitMessage}\"");
+
+        RunGitCommand("push");
+
+        Console.WriteLine("Savegame erfolgreich gepusht.");
     }
 
     static void RunGitCommand(string arguments)
@@ -62,10 +108,10 @@ class Program
 
             if (process.ExitCode != 0)
             {
-                throw new Exception($"Git Befehl '{arguments}' schlug fehl:\n{error}");
+                throw new Exception($"Git-Befehl '{arguments}' fehlgeschlagen:\n{error}");
             }
 
-            Console.WriteLine(output);
+            Console.WriteLine(output.Trim());
         }
     }
 }
