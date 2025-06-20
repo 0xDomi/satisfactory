@@ -8,7 +8,7 @@ class Program
 {
     static string saveFolderPath;
     static string repoPath;
-    static string repoSaveRelativePath = @"CurrentSaveFile\SnapshotLatest.sav";
+    static string repoSaveRelativePath = @"SnapshotLatest.sav";
     static string repoSaveFullPath;
 
     static void Main(string[] args)
